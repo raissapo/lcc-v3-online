@@ -1,0 +1,7 @@
+
+In PackageManifest.php line 179:
+                                                      
+  The C:\laragon\www\lcc-v3\bootstrap\cache director  
+  y must be present and writable.                     
+                                                      
+

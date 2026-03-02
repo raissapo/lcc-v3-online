@@ -230,7 +230,7 @@
                     <div class="card">
                         <div class="header">
                             <h2 style="font-size: 17px; font-weight: 900; color: #000080;">
-                                RIASEC BASED USER SCORES ANALYTICS
+                                RIASEC BASED USER SCORES INFORMATION
                             </h2>
                         </div>
                         <div class="body">
@@ -267,7 +267,7 @@
                     <div class="card">
                         <div class="header">
                             <h2 style="font-size: 17px; font-weight: 900; color: #000080;">
-                                ANALYTICS PREFERENCE BASED ON RESULTS
+                              INFORMATION PREFERENCE BASED ON RESULTS
                             </h2>
                         </div>
                         <div class="body">

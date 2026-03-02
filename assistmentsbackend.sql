@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 04, 2026 at 01:46 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Generation Time: Feb 20, 2026 at 02:50 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,8 +18,34 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `assistmentsystem`
+-- Database: `assistmentsbackend`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `about_settings`
+--
+
+CREATE TABLE `about_settings` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `header_image` varchar(255) DEFAULT NULL,
+  `about_description` longtext DEFAULT NULL,
+  `history` longtext DEFAULT NULL,
+  `vision_mission` longtext DEFAULT NULL,
+  `contact_info` longtext DEFAULT NULL,
+  `campuses` longtext DEFAULT NULL,
+  `hymn_link` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `about_settings`
+--
+
+INSERT INTO `about_settings` (`id`, `header_image`, `about_description`, `history`, `vision_mission`, `contact_info`, `campuses`, `hymn_link`, `created_at`, `updated_at`) VALUES
+(1, '1771593382_about.png', 'Sample Description', 'Sample History', 'Sample vision and mission', 'Sample Contact Info', 'Sample Campuses', 'https://www.youtube.com/embed/DbDJojRB6VA', '2026-02-20 13:16:22', '2026-02-20 13:16:22');
 
 -- --------------------------------------------------------
 
@@ -548,7 +574,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('rpzULJ8s9w8O2T89dsDruusExPQLjd7TNSBy0a01', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoieXRaV1UxTDRISFBuV3hxOEhBWWVKcmduZXROVmROazl4WjhxcnlsaSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1770209148);
+('O87Hhm5V2KShHuZO4Ua9wbfzqLGukbBGtsr5lzmb', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiOHFJN1Z4b2JMY1lWa05NR1o4TWhuYVFtVDhVRVFFWjF2OFZjZFlFUSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hYm91dCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1771595212);
 
 -- --------------------------------------------------------
 
@@ -574,6 +600,12 @@ CREATE TABLE `users` (
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `about_settings`
+--
+ALTER TABLE `about_settings`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `admins`
@@ -710,6 +742,12 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `about_settings`
+--
+ALTER TABLE `about_settings`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `admins`

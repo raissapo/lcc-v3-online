@@ -27,8 +27,9 @@
     <nav class="navbar navbar-expand-lg navbar-dark" id="navbar">
         <div class="container-fluid">
             <a class="navbar-brand" href="{{ route('default.page') }}">
-<img style="height: 60px" > &nbsp; LA CONCEPCION COLLEGE            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <img style="height: 60px"> &nbsp; LA CONCEPCION COLLEGE </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -42,30 +43,28 @@
 
 
                     @auth('admin')
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.dashboard.page') }}">Dashboard</a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.dashboard.page') }}">Dashboard</a>
+                        </li>
                     @else
-                    @auth('users')
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('users.information.page') }}">Results</a>
-                    </li>
-                    @else
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.login.page') }}">Admin Login</a>
-                    </li>
+                        @auth('users')
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('users.information.page') }}">Results</a>
+                            </li>
+                        @else
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.login.page') }}">Admin Login</a>
+                            </li>
+                        @endauth
                     @endauth
-                    @endauth
 
                     @auth('users')
-
-
                     @else
-                    @unless(Auth::guard('admin')->check())
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('users.login.page') }}">Examiners Login</a>
-                    </li>
-                    @endunless
+                        @unless (Auth::guard('admin')->check())
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('users.login.page') }}">Examiners Login</a>
+                            </li>
+                        @endunless
                     @endauth
                 </ul>
 
@@ -77,18 +76,18 @@
         <h1>{{ $course->course_name }}</h1>
 
         <!-- Slick Carousel -->
-        @if($course->course_picture && is_array($course->course_picture))
-        <div class="slick-container mb-4">
-            @foreach($course->course_picture as $picture)
-            <div>
-                <img src="{{ asset('storage/course/course_picture/' . $picture) }}" 
-                     alt="{{ $course->course_name }}" class="img-fluid course-image">
+        @if ($course->course_picture && is_array($course->course_picture))
+            <div class="slick-container mb-4">
+                @foreach ($course->course_picture as $picture)
+                    <div>
+                        <img src="{{ asset('storage/course/course_picture/' . $picture) }}"
+                            alt="{{ $course->course_name }}" class="img-fluid course-image">
+                    </div>
+                @endforeach
             </div>
-            @endforeach
-        </div>
         @else
-        <img src="{{ asset('default-course-image.jpg') }}" 
-             alt="{{ $course->course_name }}" class="img-fluid mb-4 course-image">
+            <img src="{{ asset('default-course-image.jpg') }}" alt="{{ $course->course_name }}"
+                class="img-fluid mb-4 course-image">
         @endif
 
         <p><strong>Course Description:</strong></p>
@@ -97,11 +96,26 @@
         <a href="{{ route('default.page') }}" class="btn btn-secondary mb-5">Back to Courses</a>
     </div>
 
+    <button id="chatToggleBtn" class="chat-btn">
+        <img src="{{ asset('profile-28.svg') }}" alt="Chat" width="28" height="28">
+    </button>
+
+
+    <div id="chatModal" class="chat-modal">
+        <div class="chat-header">
+            <span>ASSISTbot</span>
+
+        </div>
+
+        <iframe src="https://page.botpenguin.com/68d4af53c61cda54b17f1577/68d4af070e1a130391d86ff8" frameborder="0">
+        </iframe>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script>
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $('.slick-container').slick({
                 slidesToShow: 1,
                 slidesToScroll: 1,
@@ -111,6 +125,19 @@
                 autoplay: true,
                 autoplaySpeed: 2000
             });
+        });
+    </script>
+
+    <script>
+        const chatBtn = document.getElementById('chatToggleBtn');
+        const chatModal = document.getElementById('chatModal');
+
+        chatBtn.addEventListener('click', () => {
+            if (chatModal.style.display === 'flex') {
+                chatModal.style.display = 'none';
+            } else {
+                chatModal.style.display = 'flex';
+            }
         });
     </script>
 </body>

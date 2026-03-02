@@ -74,89 +74,71 @@
                 <ol style="font-size: 15px;" class="breadcrumb breadcrumb-col-red">
                     <li><a href="dashboard.html"><i style="font-size: 20px;" class="material-icons">home</i>
                             Dashboard</a></li>
-                    <li class="active"><i style="font-size: 20px;" class="material-icons">admin_panel_settings</i> List
-                        of Users
+                    <li class="active"><i style="font-size: 20px;" class="material-icons">web</i> About
+                        Settings
                     </li>
                 </ol>
             </div>
 
             <!-- Widgets -->
             <div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
-                            <h2 style="font-size: 25px; font-weight: 900; color: #000080;">
-                                List of Users
+                            <h2 style="font-weight:900; color:#000080;">
+                                Profile Management
                             </h2>
                         </div>
                         <div class="body">
-                            <div>
-                                <a href="" class="btn bg-red waves-effect" style="margin-bottom: 15px;"
-                                    data-toggle="modal" data-target="#addAdminModal">+ ADD USERS</a>
-                            </div>
-                            @include('admin.admin_management.modals.admin_add_modal')
-                            <div class="table-responsive">
-                                <table
-                                    class="table table-bordered table-striped table-hover js-basic-example dataTable">
-                                    <thead>
-                                        <tr>
-                                            <th>Profile picture</th>
-                                            <th>Fullname</th>
-                                            <th>Email</th>
-                                            <th>Created At</th>
-                                            <th>Updated At</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($admins as $admin)
-                                            <tr>
-                                                <td>
-                                                    @if ($admin->profile_picture)
-                                                        <img src="{{ asset('storage/' . $admin->profile_picture) }}"
-                                                            alt="Profile Picture" data-toggle="modal"
-                                                            data-target="#profilePictureModal{{ $admin->id }}"
-                                                            style="width: 50px; height: 50px; border-radius: 50%; cursor: pointer;">
-                                                        <span data-toggle="modal"
-                                                            data-target="#profilePictureModal{{ $admin->id }}"
-                                                            style="cursor: pointer">View</span>
-                                                        @include('admin.admin_management.modals.picture.admin_profile_picture')
-                                                    @else
-                                                        No Image
-                                                    @endif
-                                                </td>
-                                                <td>{{ $admin->fullname }}</td>
-                                                <td>{{ $admin->email }}</td>
-                                                <td>{{ $admin->created_at }}</td>
-                                                <td>{{ $admin->updated_at }}</td>
-                                                <td>
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-primary dropdown-toggle"
-                                                            data-toggle="dropdown" aria-haspopup="true"
-                                                            aria-expanded="false">
-                                                            <i style="font-size: 15px"
-                                                                class="material-icons">more_vert</i>
-                                                        </button>
-                                                        <ul class="dropdown-menu"
-                                                            style="z-index: 9999; position: relative;">
-                                                            <li><a href="javascript:void(0);" data-toggle="modal"
-                                                                    data-target="#editAdminModal{{ $admin->id }}">EDIT</a>
-                                                            </li>
-                                                            <li><a href="javascript:void(0);" data-toggle="modal"
-                                                                    data-target="#deleteAdminModal{{ $admin->id }}">DELETE</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <!-- Edit Admin Modal -->
-                                                    @include('admin.admin_management.modals.admin_edit_modal')
-                                                    <!-- Delete Confirmation Modal -->
-                                                    @include('admin.admin_management.modals.admin_delete_modal')
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
+
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+
+                            <form action="{{ route('admin.profile.update') }}" method="POST"
+                                enctype="multipart/form-data">
+                                @csrf
+
+                                <div class="text-center">
+                                    @if ($admin->profile_picture)
+                                        <img src="{{ asset('admin_images/' . $admin->profile_picture) }}" width="150"
+                                            height="150" style="border-radius:50%; object-fit:cover;">
+                                    @else
+                                        <img src="{{ asset('auth/images/logo.png') }}" width="150" height="150"
+                                            style="border-radius:50%;">
+                                    @endif
+                                </div>
+
+                                <div class="form-group mt-3">
+                                    <label>Profile Picture</label>
+                                    <input type="file" name="profile_picture" class="form-control">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Full Name</label>
+                                    <input type="text" name="fullname" class="form-control"
+                                        value="{{ $admin->fullname }}" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="email" name="email" class="form-control"
+                                        value="{{ $admin->email }}" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>New Password (Optional)</label>
+                                    <input type="password" name="password" class="form-control"
+                                        placeholder="Leave blank if no change">
+                                </div>
+
+                                <button type="submit" class="btn btn-primary waves-effect">
+                                    UPDATE PROFILE
+                                </button>
+                            </form>
+
                         </div>
                     </div>
                 </div>

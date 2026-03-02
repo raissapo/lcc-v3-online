@@ -3,15 +3,21 @@
     <div class="menu">
         <ul class="list">
             <li class="{{ request()->routeIs('admin.dashboard.page') ? 'active' : '' }}">
-                <a href="{{ route('admin.dashboard.page')}}">
+                <a href="{{ route('admin.dashboard.page') }}">
                     <i class="material-icons">home</i>
                     <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="{{ request()->routeIs('admin.about.page') ? 'active' : '' }}">
+                <a href="{{ route('admin.about.page') }}">
+                    <i class="material-icons">web</i>
+                    <span>About Management</span>
                 </a>
             </li>
             <li class="{{ request()->routeIs('admin.admin.management.page') ? 'active' : '' }}">
                 <a href="{{ route('admin.admin.management.page') }}">
                     <i class="material-icons">admin_panel_settings</i>
-                    <span>Admin Management</span>
+                    <span>Users Management</span>
                 </a>
             </li>
             <li class="{{ request()->routeIs('admin.default.id.page', 'admin.examiners.page') ? 'active' : '' }}">
@@ -28,7 +34,8 @@
                     </li>
                 </ul>
             </li>
-            <li class="{{ request()->routeIs('admin.course.page', 'admin.riasec.page', 'admin.questionnaire.page') ? 'active' : '' }}">
+            <li
+                class="{{ request()->routeIs('admin.course.page', 'admin.riasec.page', 'admin.questionnaire.page') ? 'active' : '' }}">
                 <a href="javascript:void(0);" class="menu-toggle">
                     <i class="material-icons">description</i>
                     <span>Assesstment Management</span>

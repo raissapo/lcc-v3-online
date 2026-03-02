@@ -131,3 +131,62 @@ header p {
         font-size: 1em;
     }
 }
+
+/* CHATBOT */
+.chat-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #000080;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.chat-btn:hover {
+    background: #FEC653;
+    color: #000;
+}
+
+.chat-modal {
+    position: fixed;
+    bottom: 90px;
+    right: 25px;
+    width: 440px;
+    height: 520px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .3);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 9999;
+}
+
+.chat-header {
+    background: #000080;
+    color: #fff;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chat-header button {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.chat-modal iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}

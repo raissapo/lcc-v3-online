@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\admin\AboutController as AdminAboutController;
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\AnalyticsController;
 use App\Http\Controllers\admin\CourseController;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\ExaminersController;
+use App\Http\Controllers\admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\admin\QuestionnaireController;
 use App\Http\Controllers\admin\ResultsController;
 use App\Http\Controllers\admin\RiasecController;
@@ -35,6 +37,12 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/dashboard', [DashboardController::class, 'AdminDashboardPage'])->name('admin.dashboard.page');
     Route::get('/api/yearly-examinees', [DashboardController::class, 'GetYearlyExaminees']);
     Route::post('/admin/change-password', [DashboardController::class, 'AdminChangePassword'])->name('admin.change.password');
+    Route::get('/admin/profile', [AdminProfileController::class, 'AdminProfilePage'])->name('admin.profile.page');
+    Route::post('/admin/profile/update', [AdminProfileController::class, 'UpdateAdminProfile'])
+        ->name('admin.profile.update');
+
+    Route::get('/admin/about', [AdminAboutController::class, 'AdminAboutPage'])->name('admin.about.page');
+    Route::post('/admin/about/update', [AdminAboutController::class, 'updateAbout'])->name('update.about');
 
 
     // ADMIN MANAGEMENT PAGE ADMIN
@@ -46,7 +54,7 @@ Route::middleware(['admin'])->group(function () {
     // DEFAULT ID PAGE ADMIN
     Route::get('/admin/default_id', [ExaminersController::class, 'DefaultIDPage'])->name('admin.default.id.page');
     Route::post('/admin/default-id/import', [ExaminersController::class, 'ImportDefaultId'])
-    ->name('admin.default.id.import');
+        ->name('admin.default.id.import');
     Route::post('/admin/add_examiners', [ExaminersController::class, 'ExaminersAccountAdd'])->name('admin.add.examiners');
     Route::delete('/admin/examiners_account/delete/{default_id}', [ExaminersController::class, 'ExaminersDefaultIdDelete'])->name('admin.delete.examiners');
     Route::post('/admin/default-id/bulk-delete', [ExaminersController::class, 'ExaminersBulkDefaultIdDelete'])->name('admin.default.id.bulk.delete');
@@ -57,7 +65,7 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/get-examinees-month-year', [ExaminersController::class, 'GetExamineesMonthYear'])->name('admin.filter-month-year.examiners');
     Route::get('/admin/print-examinees', [ExaminersController::class, 'printExaminees'])->name('admin.print-examinees');
     Route::delete('/admin/examiners_list/delete/{id}', [ExaminersController::class, 'ExaminersListDelete'])->name('admin.delete.examiners.list');
-    
+
     // CSV TEMPLATE UI
     Route::get('/admin/examiners/excel', [ExaminersController::class, 'ExaminersExcelUIPage'])->name('admin.examiners.excel.page');
     Route::get('/admin/examiners/excel/data', [ExaminersController::class, 'getExaminersData'])
@@ -66,10 +74,10 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/admin/examiners/excel/add', [ExaminersController::class, 'addExaminerRow'])
         ->name('admin.examiners.excel.add');
 
-Route::put('/admin/examiners/excel/update', [ExaminersController::class, 'updateExaminerRow'])
-    ->name('admin.examiners.excel.update');
+    Route::put('/admin/examiners/excel/update', [ExaminersController::class, 'updateExaminerRow'])
+        ->name('admin.examiners.excel.update');
 
-    
+
     // RIASEC PAGE ADMIN
     Route::get('/admin/riasec', [RiasecController::class, 'RiasecPage'])->name('admin.riasec.page');
     Route::post('/admin/add_riasec', [RiasecController::class, 'AddRiasec'])->name('admin.add.riasec');
@@ -128,5 +136,4 @@ Route::middleware(['users'])->group(function () {
     Route::get('/riasec/scores', [ExaminationController::class, 'ExaminersGetUserRiasecScores'])->name('users.riasec.scores');
     Route::get('/riasec/training-data', [ExaminationController::class, 'ExaminersGetTrainingData'])->name('riasec.training.data');
     Route::get('/riasec/predict', [ExaminationController::class, 'ExaminersPredictAnswers'])->name('users.riasec.predict');
-
 });
